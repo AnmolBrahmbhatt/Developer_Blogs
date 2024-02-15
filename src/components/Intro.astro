@@ -1,0 +1,50 @@
+---
+import { readAll } from "../lib/markdoc/read";
+import { blog } from "../lib/markdoc/frontmatter.schema";
+import PageLayout from "../layouts/PageLayout.astro";
+import PageMeta from "../components/PageMeta.astro";
+import { SITE_TITLE } from "../config";
+const posts = await readAll({
+  directory: "blog",
+  frontmatterSchema: blog,
+});
+
+const sortedPosts = posts
+  .filter((p) => p.frontmatter.draft !== true)
+  .sort(
+    (a, b) =>
+      new Date(b.frontmatter.date).valueOf() -
+      new Date(a.frontmatter.date).valueOf()
+  );
+---
+
+<section class=`mt-[4rem] mb-8 text-center rounded-xl`>
+  <div class="mb-4">
+    <h1
+      class="py-4 font-extrabold text-5xl md:text-6xl tracking-tight pt-4 pb-2 overflow-hidden"
+    >
+      <span
+        class="bg-gradient-to-br from-[#fb923c] via-[#f97316] to-[#ea580c] dark:from-primary-main dark:via-primary-main dark:to-primary-main bg-clip-text text-transparent "
+      >
+        Developer Blogs
+      </span>
+    </h1>
+    <span
+    class="bg-gradient-to-br from-[#fb923c] via-[#f97316] to-[#ea580c] dark:from-primary-main dark:via-primary-main dark:to-primary-main bg-clip-text text-transparent ">Let us Help You to Become a Good Developer
+    </span>
+  </div>
+  <div>
+    <span
+    class="bg-gradient-to-br from-[#fb923c] via-[#f97316] to-[#ea580c] dark:from-primary-main dark:via-primary-main dark:to-primary-main bg-clip-text text-transparent ">
+      Your coding companion for insights, tutorials, and the latest trends. Join us on a journey of learning and exploration in the world of programming!
+    </span>
+   
+  </div>
+  <hr class="mt-5 opacity-25"> 
+</section>
+
+<style>
+  section {
+     background-image:linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://akm-img-a-in.tosshub.com/indiatoday/images/story/202012/chris-ried-ieic5Tq8YMk-unsplas_1200x768.jpeg?size=1200:675"); 
+  }
+</style>
